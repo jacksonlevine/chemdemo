@@ -5,7 +5,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { ELEMENTS, getMoleculePoints } from "pubchemtest";
 
 // ─────────────────────────────────────────────────────────────────────────────
-const ATOM_SCALE = 0.3;
+const ATOM_SCALE = 1.0;
 
 const ATOM_RADII = {
     H: 0.12 * ATOM_SCALE,
