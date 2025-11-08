@@ -18,17 +18,17 @@ let resizeObserver = null;
 
 const maxPoints = 150;
 const ELEMENT_TEXTURES = {
-    H: "/pure-plant-new/images/h.png",
-    C: "/pure-plant-new/images/c.png",
-    N: "/pure-plant-new/images/c.png",
-    O: "/pure-plant-new/images/c.png",
-    F: "/pure-plant-new/images/c.png",
-    P: "/pure-plant-new/images/dot.png",
-    S: "/pure-plant-new/images/dot.png",
-    Cl: "/pure-plant-new/images/dot.png",
-    Br: "/pure-plant-new/images/dot.png",
-    I: "/pure-plant-new/images/dot.png",
-    Unknown: "/pure-plant-new/images/dot.png",
+    H: "/chemdemo/images/h.png",
+    C: "/chemdemo/images/c.png",
+    N: "/chemdemo/images/c.png",
+    O: "/chemdemo/images/c.png",
+    F: "/chemdemo/images/c.png",
+    P: "/chemdemo/images/dot.png",
+    S: "/chemdemo/images/dot.png",
+    Cl: "/chemdemo/images/dot.png",
+    Br: "/chemdemo/images/dot.png",
+    I: "/chemdemo/images/dot.png",
+    Unknown: "/chemdemo/images/dot.png",
 };
 
 let POSITION_SETS = [];
