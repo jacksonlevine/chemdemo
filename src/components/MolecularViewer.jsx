@@ -1,7 +1,7 @@
-﻿import React, { useEffect, useRef } from "react";
+﻿import React, {useEffect, useRef} from "react";
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { getMoleculePoints, ELEMENTS } from "pubchemtest";
+import {OrbitControls} from "three/examples/jsm/controls/OrbitControls.js";
+import {ELEMENTS, getMoleculePoints} from "pubchemtest";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // SHARED GLOBALS — ONE-TIME SETUP, PERSISTENT ACROSS NAVIGATION
@@ -126,8 +126,20 @@ const PointCloudBillboard = () => {
         if (!mountRef.current) return;
 
         const init = async () => {
-            // 1. Load data once
-            await loadMoleculesOnce();
+            // Read compounds from URL dynamically in the browser
+            const params = new URLSearchParams(window.location.search);
+            const compoundsToLoad = params.get("compounds")?.split(";").map(c => c.trim()).filter(Boolean);
+
+            // Load molecules based on compoundsToLoad
+            if (POSITION_SETS.length === 0) {
+                let prev = null;
+                for (const name of compoundsToLoad.length ? compoundsToLoad : ["Ergosterol", "Previtamin D2", "Ergocalciferol"]) {
+                    const mol = await getMoleculePoints(name, 0.45, prev);
+                    POSITION_SETS.push(mol);
+                    prev = mol;
+                }
+            }
+
 
             // 2. One-time THREE setup
             if (!sharedRenderer) {

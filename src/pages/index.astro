@@ -1,16 +1,41 @@
 ---
-
+import PointCloudBillboard from "../components/MolecularViewer";
+import "../styles/global.css"
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<
-	</body>
-</html>
+<div class="flex flex-col gap-2 p-4">
+    <input
+            id="compoundInput"
+            type="text"
+            placeholder="e.g. water;ethanol;glucose"
+            class="border border-gray-300 rounded px-2 py-1 w-96"
+    />
+
+    <button
+            id="goButton"
+            class="bg-blue-600 text-white px-4 py-2 rounded"
+    >
+        Go
+    </button>
+
+    <h1 id="paramDisplay" class="mt-4 text-lg font-bold"></h1>
+    <PointCloudBillboard client:load></PointCloudBillboard>
+</div>
+
+<script>
+    const input = document.getElementById('compoundInput');
+    const button = document.getElementById('goButton');
+    const display = document.getElementById('paramDisplay');
+
+    // Show params on page load
+    const params = new URLSearchParams(window.location.search);
+    const compounds = params.get('compounds') || '';
+    display.textContent = compounds;
+    input.value = compounds;
+
+    // Go button navigates
+    button.addEventListener('click', () => {
+        const val = encodeURIComponent(input.value);
+        window.location.href = `/chemdemo?compounds=${val}`;
+    });
+</script>
