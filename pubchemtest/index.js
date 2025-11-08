@@ -261,15 +261,31 @@ export async function getMoleculePoints(name, inferredTolerance = 0.45, previous
         }
     }
 
-    // Normalize to [-0.5, 0.5] cube
+    // Normalize and center
     const xs = atoms.map(a => a[0]), ys = atoms.map(a => a[1]), zs = atoms.map(a => a[2]);
     const min = { x: Math.min(...xs), y: Math.min(...ys), z: Math.min(...zs) };
     const max = { x: Math.max(...xs), y: Math.max(...ys), z: Math.max(...zs) };
 
+    const center = [
+        (min.x + max.x) / 2,
+        (min.y + max.y) / 2,
+        (min.z + max.z) / 2
+    ];
+    const size = [
+        max.x - min.x,
+        max.y - min.y,
+        max.z - min.z
+    ];
+
+// Determine if we need to scale down
+    const maxDim = Math.max(size[0], size[1], size[2]);
+    const scale = maxDim > 1.0 ? 1.0 / maxDim : 1.0;
+
+// Center and (if needed) scale
     atoms = atoms.map(a => [
-        ((a[0] - min.x) / (max.x - min.x || 1)) - 0.5,
-        ((a[1] - min.y) / (max.y - min.y || 1)) - 0.5,
-        ((a[2] - min.z) / (max.z - min.z || 1)) - 0.5
+        (a[0] - center[0]) * scale,
+        (a[1] - center[1]) * scale,
+        (a[2] - center[2]) * scale
     ]);
 
     return { atoms, elementIndexes, bonds, atomMapping };
