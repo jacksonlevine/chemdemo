@@ -260,7 +260,7 @@ const PointCloudBillboard = () => {
         const init = async () => {
             const params = new URLSearchParams(window.location.search);
             const compoundsToLoad = params.get("compounds")?.split(";").map(c => c.trim()).filter(Boolean) ||
-                [];
+                ["ergosterol","previtamin d2","ergocalciferol"];
 
             await loadMoleculesOnce(compoundsToLoad);
             if (POSITION_SETS.length === 0) return;
