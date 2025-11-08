@@ -5,7 +5,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { ELEMENTS, getMoleculePoints } from "pubchemtest";
 
 // ─────────────────────────────────────────────────────────────────────────────
-const ATOM_SCALE = 1.0;
+const ATOM_SCALE = 0.3;
 
 const ATOM_RADII = {
     H: 0.12 * ATOM_SCALE,
@@ -278,8 +278,8 @@ const PointCloudBillboard = () => {
                 sharedControls.enableDamping = true;
                 sharedControls.enableZoom = false;
 
-                sharedControls.minDistance = 2.5;
-                sharedControls.maxDistance = 2.5;  
+                sharedControls.minDistance = 1.5;
+                sharedControls.maxDistance = 1.5;  
                 
                 sharedScene.add(new THREE.AmbientLight(0xffffff, 0.6));
                 const dirLight = new THREE.DirectionalLight(0xffffff, 1.0);
